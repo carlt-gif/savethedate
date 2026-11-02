@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Our Date - Alex & Jordan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfbf9;
+            --primary-color: #2c3531;
+            --accent-color: #bfa181;
+            --soft-accent: #eaddca;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(44, 53, 49, 0.08);
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(191, 161, 129, 0.2);
+        }
+
+        /* Header styling */
+        .subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-style: italic;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background-color: var(--accent-color);
+            margin: 0 auto 30px auto;
+        }
+
+        /* Event Details */
+        .event-details {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .event-details strong {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .countdown-box {
+            background: var(--bg-color);
+            padding: 15px 10px;
+            border-radius: 8px;
+            min-width: 75px;
+            border: 1px solid var(--soft-accent);
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-top: 5px;
+        }
+
+        /* Interactive RSVP Section */
+        .rsvp-section {
+            background-color: var(--bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--soft-accent);
+            text-align: left;
+        }
+
+        .rsvp-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--soft-accent);
+            border-radius: 4px;
+            background: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, select:focus {
+            border-color: var(--accent-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--accent-color);
+            padding: 20px 0;
+        }
+
+        /* Footer Note */
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 15px;
+            }
+            h1 {
+                font-size: 2.6rem;
+            }
+            .countdown-container {
+                gap: 10px;
+            }
+            .countdown-box {
+                min-width: 60px;
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="subtitle">Save The Date</div>
+        <h1>We Are Getting Married</h1>
+        <div class="names">Alex & Jordan</div>
+        
+        <div class="divider"></div>
+
+        <div class="event-details">
+            Join us to celebrate our wedding day.<br>
+            <strong>October 24, 2026</strong><br>
+            The Glasshouse Botanics, Tagaytay City<br>
+            <span style="font-size: 0.9rem; color: #666;">Formal invitation to follow</span>
+        </div>
+
+        <!-- Live Countdown Timer -->
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-box">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Mins</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Secs</span>
+            </div>
+        </div>
+
+        <!-- Interactive RSVP Form -->
+        <div class="rsvp-section">
+            <h3 id="form-title">Will you be joining us?</h3>
+            <form id="rsvpForm" onsubmit="handleRSVP(event)">
+                <div class="form-group">
+                    <label for="name">Your Full Name</label>
+                    <input type="text" id="name" required placeholder="e.g. Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="e.g. jane@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="attendance">Response</label>
+                    <select id="attendance">
+                        <option value="Joyfully Accepts">Joyfully Accepts</option>
+                        <option value="Regretfully Declines">Regretfully Declines</option>
+                    </select>
+                </div>
+                <button type="submit" id="submit-btn">Send RSVP</button>
+            </form>
+            <div id="successMessage" class="success-message">
+                Thank you for your response! We look forward to celebrating with you. 🤍
+            </div>
+        </div>
+
+        <div class="footer-note">#AlexAndJordan2026</div>
+    </div>
+
+    <script>
+        // Set your target wedding date and time here (Year, Month Index 0-11, Day, Hour, Minute)
+        const weddingDate = new Date(2026, 9, 24, 15, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<div style='font-family: Cormorant Garamond; font-size: 1.5rem; width: 100%; color: var(--accent-color);'>The Wedding Day Has Arrived! 🎉</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Handle RSVP submission interaction
+        function handleRSVP(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const attendance = document.getElementById('attendance').value;
+
+            // Log response (You could link this to a backend or Google Sheets via fetch API)
+            console.log({ name, email, attendance, timestamp: new Date() });
+
+            // Hide form and show custom success message with smooth transition
+            document.getElementById('rsvpForm').style.display = 'none';
+            document.getElementById('form-title').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
